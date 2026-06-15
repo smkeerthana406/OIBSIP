@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Calculator</title>
+<title>Perfect Calculator</title>
 
 <style>
 body{
@@ -12,60 +12,74 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:black;
+background:#0a0f1f;
 font-family:Arial;
 }
 
 .calculator{
-background:rgba(0,255,136,0.08);
-backdrop-filter:blur(10px);
+background:rgba(0,140,255,0.08);
 padding:20px;
 border-radius:20px;
 width:320px;
-box-shadow:0 0 25px #00ff88;
-border:1px solid #00ff88;
+box-shadow:0 0 30px #008cff;
+border:1px solid #008cff;
 }
 
 .display{
 width:100%;
-height:60px;
-background:#111;
-color:#00ff88;
+height:65px;
+background:#111827;
+color:#00aaff;
 font-size:28px;
 text-align:right;
 padding:10px;
 border-radius:10px;
-margin-bottom:15px;
-border:1px solid #00ff88;
+margin-bottom:10px;
+border:1px solid #008cff;
 }
 
-.buttons{
+.top{
+display:flex;
+gap:10px;
+margin-bottom:10px;
+}
+
+.top button{
+flex:1;
+padding:10px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.on{background:#00ff88;}
+.off{background:#ff3b3b;color:white;}
+
+.grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:10px;
 }
 
 button{
-padding:18px;
+padding:16px;
 font-size:18px;
 border:none;
 border-radius:10px;
 cursor:pointer;
-background:#111;
-color:#00ff88;
-transition:0.2s;
-border:1px solid #00ff88;
+background:#111827;
+color:#00aaff;
+border:1px solid #008cff;
 }
 
 button:hover{
-background:#00ff88;
+background:#00aaff;
 color:black;
-transform:scale(1.05);
 }
 
 .equal{
-grid-column:span 2;
-background:#00ff88;
+background:#00aaff;
 color:black;
 font-weight:bold;
 }
@@ -73,7 +87,6 @@ font-weight:bold;
 .clear{
 background:red;
 color:white;
-border:none;
 }
 </style>
 </head>
@@ -82,66 +95,78 @@ border:none;
 
 <div class="calculator">
 
-<div id="display" class="display">0</div>
+<div id="display" class="display">OFF</div>
 
-<div class="buttons">
+<div class="top">
+<button class="on" onclick="turnOn()">ON</button>
+<button class="off" onclick="turnOff()">OFF</button>
+</div>
 
-<button onclick="clearDisplay()" class="clear">C</button>
-<button onclick="append('/')">/</button>
-<button onclick="append('*')">*</button>
-<button onclick="backspace()">⌫</button>
+<div class="grid">
 
+<!-- ROW 1 -->
 <button onclick="append('7')">7</button>
 <button onclick="append('8')">8</button>
 <button onclick="append('9')">9</button>
-<button onclick="append('-')">-</button>
+<button onclick="append('/')">÷</button>
 
+<!-- ROW 2 -->
 <button onclick="append('4')">4</button>
 <button onclick="append('5')">5</button>
 <button onclick="append('6')">6</button>
-<button onclick="append('+')">+</button>
+<button onclick="append('*')">×</button>
 
+<!-- ROW 3 -->
 <button onclick="append('1')">1</button>
 <button onclick="append('2')">2</button>
 <button onclick="append('3')">3</button>
-<button onclick="calculate()" class="equal">=</button>
+<button onclick="append('-')">−</button>
 
+<!-- ROW 4 -->
 <button onclick="append('0')">0</button>
 <button onclick="append('.')">.</button>
+<button onclick="calculate()" class="equal">=</button>
+<button onclick="append('+')">+</button>
 
 </div>
 
 </div>
 
 <script>
-let display = document.getElementById("display");
+
+let display=document.getElementById("display");
+let isOn=false;
+
+function turnOn(){
+isOn=true;
+display.innerText="0";
+}
+
+function turnOff(){
+isOn=false;
+display.innerText="OFF";
+}
 
 function append(value){
-if(display.innerText === "0"){
-display.innerText = value;
+if(!isOn) return;
+
+if(display.innerText==="0" || display.innerText==="OFF"){
+display.innerText=value;
 }else{
-display.innerText += value;
-}
-}
-
-function clearDisplay(){
-display.innerText = "0";
-}
-
-function backspace(){
-display.innerText = display.innerText.slice(0,-1);
-if(display.innerText === ""){
-display.innerText = "0";
+display.innerText+=value;
 }
 }
 
 function calculate(){
+if(!isOn) return;
+
 try{
-display.innerText = eval(display.innerText);
+display.innerText=eval(display.innerText);
 }catch{
-display.innerText = "Error";
+display.innerText="Error";
 }
 }
+
 </script>
 
 </body>
