@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Temp Converter</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:black;
+}
+
+.box{
+background:#0b1a12;
+padding:25px;
+border-radius:18px;
+width:300px;
+text-align:center;
+color:#b6f7c8;
+box-shadow:0 0 25px #00ff88;
+border:1px solid #00ff88;
+}
+
+h2{
+color:#00ff88;
+margin-bottom:15px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+outline:none;
+background:#111;
+color:#b6f7c8;
+border:1px solid #00ff88;
+}
+
+button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#00ff88;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:black;
+color:#00ff88;
+border:1px solid #00ff88;
+}
+
+#result{
+margin-top:15px;
+font-size:18px;
+font-weight:bold;
+color:#00ff88;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>🌿 Temp Converter</h2>
+
+<input type="number" id="temp" placeholder="Enter temperature">
+
+<select id="type">
+<option value="cToF">Celsius → Fahrenheit</option>
+<option value="fToC">Fahrenheit → Celsius</option>
+<option value="cToK">Celsius → Kelvin</option>
+<option value="kToC">Kelvin → Celsius</option>
+</select>
+
+<button onclick="convert()">Convert</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+function convert(){
+let t=document.getElementById("temp").value;
+let type=document.getElementById("type").value;
+let res="";
+
+if(t===""){
+document.getElementById("result").innerHTML="Enter value!";
+return;
+}
+
+t=parseFloat(t);
+
+if(type==="cToF"){
+res=(t*9/5)+32 + " °F";
+}
+else if(type==="fToC"){
+res=(t-32)*5/9 + " °C";
+}
+else if(type==="cToK"){
+res=(t+273.15) + " K";
+}
+else if(type==="kToC"){
+res=(t-273.15) + " °C";
+}
+
+document.getElementById("result").innerHTML=res;
+}
+</script>
+
+</body>
+</html>
