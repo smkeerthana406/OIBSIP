@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>FutureAI Landing Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#020617;
+color:white;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+header{
+
+position:fixed;
+
+width:100%;
+
+top:0;
+
+z-index:1000;
+
+padding:20px 8%;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(10px);
+}
+
+nav{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+}
+
+.logo{
+
+font-size:34px;
+
+font-weight:bold;
+
+background:linear-gradient(
+to right,
+#ff00cc,
+#00f2fe
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+0 0 20px #00f2fe;
+}
+
+nav ul{
+
+display:flex;
+
+list-style:none;
+
+gap:25px;
+}
+
+nav ul li a{
+
+color:white;
+
+text-decoration:none;
+
+font-size:18px;
+
+font-weight:bold;
+
+transition:0.3s;
+cursor:pointer;
+}
+
+nav ul li a:hover{
+
+color:#00f2fe;
+
+text-shadow:
+0 0 10px #00f2fe;
+}
+
+/* HERO */
+
+.hero{
+
+position:relative;
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:20px;
+
+overflow:hidden;
+
+background:linear-gradient(
+135deg,
+#ff00cc,
+#3333ff,
+#00f2fe
+);
+
+background-size:400% 400%;
+
+animation:bgMove 10s ease infinite;
+}
+
+@keyframes bgMove{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+width:400px;
+height:400px;
+
+background:#ff00cc;
+
+filter:blur(150px);
+
+top:5%;
+left:5%;
+
+opacity:0.5;
+}
+
+.hero::after{
+
+content:"";
+
+position:absolute;
+
+width:400px;
+height:400px;
+
+background:#00f2fe;
+
+filter:blur(150px);
+
+bottom:5%;
+right:5%;
+
+opacity:0.5;
+}
+
+.content{
+
+position:relative;
+
+z-index:2;
+
+max-width:800px;
+
+animation:fadeUp 1.5s ease;
+}
+
+.content h1{
+
+font-size:65px;
+
+line-height:1.3;
+
+color:white;
+
+text-shadow:
+0 0 10px #fff,
+0 0 20px #ff00cc,
+0 0 40px #00f2fe,
+0 0 80px #7c3aed;
+
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+
+from{
+
+text-shadow:
+0 0 10px #fff,
+0 0 20px #ff00cc,
+0 0 40px #00f2fe;
+}
+
+to{
+
+text-shadow:
+0 0 20px #fff,
+0 0 40px #ff00cc,
+0 0 80px #00f2fe;
+}
+}
+
+.content p{
+
+margin-top:25px;
+
+font-size:22px;
+
+line-height:1.8;
+
+color:#f8fafc;
+}
+
+button{
+
+margin-top:35px;
+
+padding:16px 45px;
+
+border:none;
+
+border-radius:50px;
+
+background:white;
+
+color:#111827;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.4s;
+
+box-shadow:
+0 0 20px white,
+0 0 40px #00f2fe,
+0 0 80px #ff00cc;
+
+animation:buttonGlow 2s infinite alternate;
+}
+
+@keyframes buttonGlow{
+
+from{
+
+box-shadow:
+0 0 20px white,
+0 0 40px #00f2fe;
+}
+
+to{
+
+box-shadow:
+0 0 30px white,
+0 0 60px #ff00cc,
+0 0 100px #00f2fe;
+}
+}
+
+button:hover{
+
+transform:scale(1.1);
+
+background:#111827;
+
+color:white;
+}
+
+.content h4{
+
+margin-top:25px;
+
+font-size:24px;
+}
+
+/* FEATURES */
+
+.features{
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+padding:100px 20px;
+
+background:#111827;
+}
+
+.card{
+
+width:300px;
+
+padding:35px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(12px);
+
+text-align:center;
+
+transition:0.4s;
+
+box-shadow:
+0 0 20px rgba(0,0,0,0.4);
+}
+
+.card:hover{
+
+transform:translateY(-15px);
+
+background:linear-gradient(
+to right,
+#ff00cc,
+#3333ff
+);
+
+box-shadow:
+0 0 25px #ff00cc,
+0 0 50px #00f2fe;
+}
+
+.card h2{
+
+margin-bottom:18px;
+
+font-size:28px;
+}
+
+.card p{
+
+line-height:1.8;
+
+color:#e2e8f0;
+}
+
+/* ABOUT */
+
+.extra{
+
+padding:100px 20px;
+
+text-align:center;
+
+background:#020617;
+}
+
+.extra h2{
+
+font-size:50px;
+
+margin-bottom:50px;
+
+text-shadow:
+0 0 20px #00f2fe;
+}
+
+.extra-box{
+
+display:flex;
+
+flex-direction:column;
+
+gap:35px;
+
+max-width:700px;
+
+margin:auto;
+}
+
+.extra-card{
+
+padding:30px;
+
+border-radius:25px;
+
+background:linear-gradient(
+to right,
+#ff00cc,
+#00f2fe
+);
+
+font-size:24px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+0 0 20px #00f2fe;
+}
+
+.extra-card:hover{
+
+transform:scale(1.03);
+
+transition:0.4s;
+}
+
+/* INFO BOX */
+
+.info-box{
+
+display:none;
+
+margin-top:20px;
+
+padding:20px;
+
+border-radius:20px;
+
+background:#111827;
+
+box-shadow:
+0 0 20px #00f2fe;
+
+animation:fadeInfo 0.5s ease;
+}
+
+.info-box h3{
+
+font-size:30px;
+
+margin-bottom:15px;
+
+color:#00f2fe;
+
+text-shadow:
+0 0 15px #00f2fe;
+}
+
+.info-box p{
+
+font-size:18px;
+
+line-height:1.8;
+
+color:white;
+}
+
+@keyframes fadeInfo{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* FOOTER */
+
+footer{
+
+padding:60px 20px;
+
+text-align:center;
+
+background:black;
+
+color:#cbd5e1;
+}
+
+footer h2{
+
+margin-bottom:20px;
+
+font-size:35px;
+
+color:#00f2fe;
+
+text-shadow:
+0 0 20px #00f2fe;
+}
+
+footer p{
+
+margin-top:10px;
+
+font-size:18px;
+}
+
+/* PAGE ANIMATION */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+nav{
+
+flex-direction:column;
+
+gap:15px;
+}
+
+nav ul{
+
+gap:15px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+}
+
+.content h1{
+
+font-size:42px;
+}
+
+.content p{
+
+font-size:18px;
+}
+
+.extra h2{
+
+font-size:38px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header>
+
+<nav>
+
+<h2 class="logo">
+FutureAI
+</h2>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+
+<li><a href="#features">Features</a></li>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="content">
+
+<h1>
+The Future of Smart Learning Starts Here
+</h1>
+
+<p>
+Learn faster using AI-powered tools,
+interactive lessons and futuristic technology.
+</p>
+
+<button>
+Explore Now
+</button>
+
+<h4>
+Designed by Magarasi Keerthana
+</h4>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+
+<div class="card">
+
+<h2>⚡ Fast Learning</h2>
+
+<p>
+Learn quickly with smart interactive methods.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🤖 AI Support</h2>
+
+<p>
+Get AI-powered guidance anytime you need.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🎯 Interactive</h2>
+
+<p>
+Enjoy modern engaging and fun experiences.
+</p>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="extra" id="about">
+
+<h2>
+Why Choose FutureAI?
+</h2>
+
+<div class="extra-box">
+
+<!-- CARD 1 -->
+
+<div class="extra-card">
+
+<div onclick="showInfo('ml')">
+
+🚀 Modern Learning
+
+</div>
+
+<div id="mlInfo" class="info-box">
+
+<h3>
+🤖 What is Machine Learning?
+</h3>
+
+<p>
+
+Machine Learning means computers learn automatically from data.
+
+Examples:
+Netflix recommendations,
+Face Unlock,
+Chatbots,
+YouTube suggestions.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="extra-card">
+
+<div onclick="showInfo('trust')">
+
+🌍 Trusted Worldwide
+
+</div>
+
+<div id="trustInfo" class="info-box">
+
+<h3>
+🌎 Trusted Worldwide
+</h3>
+
+<p>
+
+AI technology is used by millions of people and companies worldwide.
+
+Many apps and websites depend on AI
+to improve user experience.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="extra-card">
+
+<div onclick="showInfo('ai')">
+
+💡 Smart AI Features
+
+</div>
+
+<div id="aiInfo" class="info-box">
+
+<h3>
+✨ Smart AI Features
+</h3>
+
+<p>
+
+AI features help users learn faster,
+get smart suggestions and interactive support.
+
+Examples:
+AI Chatbots,
+Voice Assistants,
+Smart Search.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<footer id="contact">
+
+<h2>Contact Us</h2>
+
+<p>Email: futureai@gmail.com</p>
+
+<p>Phone: +91 9876543210</p>
+
+<p>Instagram: @futureai_official</p>
+
+<p>
+© 2026 FutureAI | All Rights Reserved
+</p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function showInfo(type){
+
+document.getElementById("mlInfo").style.display="none";
+
+document.getElementById("trustInfo").style.display="none";
+
+document.getElementById("aiInfo").style.display="none";
+
+if(type=="ml"){
+
+document.getElementById("mlInfo").style.display="block";
+
+}
+
+if(type=="trust"){
+
+document.getElementById("trustInfo").style.display="block";
+
+}
+
+if(type=="ai"){
+
+document.getElementById("aiInfo").style.display="block";
+
+}
+
+}
+
+</script>
+
+</body>
+  </html>
