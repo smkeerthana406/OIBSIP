@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberpunk Productivity Dashboard</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#050816;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+padding:20px;
+}
+
+/* BACKGROUND LIGHTS */
+
+body::before{
+content:"";
+position:fixed;
+width:350px;
+height:350px;
+background:#00ffff;
+filter:blur(140px);
+top:-100px;
+left:-100px;
+opacity:0.15;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:350px;
+height:350px;
+background:#8a2be2;
+filter:blur(140px);
+bottom:-100px;
+right:-100px;
+opacity:0.18;
+z-index:-1;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1000px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+border-radius:25px;
+padding:25px;
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:
+0 0 20px rgba(0,255,255,0.12),
+0 0 40px rgba(140,0,255,0.10);
+}
+
+/* TITLE */
+
+h1{
+text-align:center;
+font-size:42px;
+color:#00ffff;
+text-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff;
+margin-bottom:10px;
+}
+
+/* CLOCK */
+
+.clock{
+text-align:center;
+font-size:22px;
+margin-bottom:20px;
+color:#ffffff;
+}
+
+/* QUOTE */
+
+.quote-card{
+padding:18px;
+margin-bottom:25px;
+border-radius:18px;
+background:rgba(255,255,255,0.06);
+box-shadow:0 0 20px rgba(255,0,255,0.15);
+text-align:center;
+font-style:italic;
+font-size:18px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat-box{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 0 15px rgba(0,255,255,0.08);
+}
+
+.stat-box h3{
+color:#00ffff;
+margin-bottom:10px;
+}
+
+/* INPUT AREA */
+
+.input-area{
+display:grid;
+gap:15px;
+margin-bottom:25px;
+}
+
+input,select{
+padding:14px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:16px;
+outline:none;
+}
+
+/* BUTTONS */
+
+button{
+padding:13px;
+border:none;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.add-btn{
+background:linear-gradient(45deg,#00ffff,#8a2be2);
+color:white;
+box-shadow:0 0 15px rgba(0,255,255,0.4);
+}
+
+.clear-btn{
+background:#ff3b5c;
+color:white;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* SEARCH */
+
+#search{
+margin-bottom:20px;
+}
+
+/* SECTION */
+
+.section-title{
+margin-top:25px;
+margin-bottom:15px;
+font-size:26px;
+color:#00ffff;
+text-shadow:0 0 10px #00ffff;
+}
+
+/* TASK */
+
+.task{
+background:rgba(255,255,255,0.06);
+padding:18px;
+margin-top:15px;
+border-radius:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 0 12px rgba(0,255,255,0.08),
+0 0 18px rgba(140,0,255,0.08);
+transition:0.3s;
+animation:fade 0.4s ease;
+}
+
+.task:hover{
+transform:translateY(-5px);
+box-shadow:
+0 0 20px rgba(0,255,255,0.25),
+0 0 30px rgba(140,0,255,0.2);
+}
+
+/* TASK INFO */
+
+.task-info{
+max-width:70%;
+word-wrap:break-word;
+}
+
+.priority{
+margin-top:6px;
+font-size:13px;
+color:#00ffff;
+}
+
+.category{
+margin-top:5px;
+font-size:13px;
+color:#ff9df5;
+}
+
+.time{
+font-size:12px;
+color:#ccc;
+margin-top:6px;
+}
+
+/* ACTIONS */
+
+.actions button{
+margin-left:5px;
+font-size:14px;
+}
+
+/* ACTION COLORS */
+
+.complete{
+background:#00ff99;
+color:black;
+}
+
+.edit{
+background:#ffaa00;
+color:black;
+}
+
+.delete{
+background:#ff3b5c;
+color:white;
+}
+
+/* PROGRESS */
+
+.progress-box{
+width:100%;
+height:14px;
+background:#111827;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+#progress{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00ffff,#8a2be2);
+transition:0.5s;
+}
+
+/* COMPLETED EFFECT */
+
+.completed{
+animation:glow 0.6s ease;
+}
+
+@keyframes glow{
+0%{
+transform:scale(0.9);
+}
+100%{
+transform:scale(1);
+box-shadow:0 0 25px #00ff99;
+}
+}
+
+/* FADE */
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 AI Productivity Dashboard</h1>
+
+<div class="clock" id="clock"></div>
+
+<div class="quote-card">
+“Success doesn’t come from motivation alone. It comes from consistency.” ✨
+</div>
+
+<div class="stats">
+
+<div class="stat-box">
+<h3>Total Tasks</h3>
+<p id="count">0</p>
+</div>
+
+<div class="stat-box">
+<h3>Completed</h3>
+<p id="done">0</p>
+</div>
+
+<div class="stat-box">
+<h3>Productivity</h3>
+<p id="score">0%</p>
+</div>
+
+</div>
+
+<div class="progress-box">
+<div id="progress"></div>
+</div>
+
+<div class="input-area">
+
+<input type="text" id="taskInput" placeholder="Enter your task...">
+
+<select id="priority">
+<option>🔥 High Priority</option>
+<option>⚡ Medium Priority</option>
+<option>🌿 Low Priority</option>
+</select>
+
+<select id="category">
+<option>📚 Study</option>
+<option>💻 Coding</option>
+<option>🏋 Fitness</option>
+<option>🎯 Personal</option>
+</select>
+
+<button class="add-btn" onclick="addTask()">Add Task</button>
+
+<button class="clear-btn" onclick="clearAll()">Clear All</button>
+
+</div>
+
+<input type="text" id="search" placeholder="🔍 Search task..." onkeyup="searchTask()">
+
+<h2 class="section-title">📌 Pending Tasks</h2>
+<div id="pending"></div>
+
+<h2 class="section-title">✅ Completed Tasks</h2>
+<div id="completed"></div>
+
+</div>
+
+<script>
+
+/* LIVE CLOCK */
+
+setInterval(()=>{
+document.getElementById("clock").innerText=
+new Date().toLocaleTimeString();
+},1000);
+
+/* ADD TASK */
+
+function addTask(){
+
+let input=document.getElementById("taskInput");
+let priority=document.getElementById("priority").value;
+let category=document.getElementById("category").value;
+
+if(input.value===""){
+alert("Please enter a task!");
+return;
+}
+
+let taskText=input.value;
+
+let time=new Date().toLocaleString();
+
+let task=document.createElement("div");
+
+task.className="task";
+
+task.innerHTML=`
+
+<div class="task-info">
+
+<div>${taskText}</div>
+
+<div class="priority">${priority}</div>
+
+<div class="category">${category}</div>
+
+<div class="time">Added: ${time}</div>
+
+</div>
+
+<div class="actions">
+
+<button class="complete" onclick="completeTask(this)">✔</button>
+
+<button class="edit" onclick="editTask(this)">✏</button>
+
+<button class="delete" onclick="deleteTask(this)">🗑</button>
+
+</div>
+
+`;
+
+document.getElementById("pending").appendChild(task);
+
+input.value="";
+
+updateStats();
+
+}
+
+/* COMPLETE */
+
+function completeTask(btn){
+
+let task=btn.parentElement.parentElement;
+
+task.classList.add("completed");
+
+document.getElementById("completed").appendChild(task);
+
+btn.remove();
+
+updateStats();
+
+}
+
+/* DELETE */
+
+function deleteTask(btn){
+
+btn.parentElement.parentElement.remove();
+
+updateStats();
+
+}
+
+/* EDIT */
+
+function editTask(btn){
+
+let taskText=btn.parentElement.parentElement.querySelector(".task-info div");
+
+let updated=prompt("Edit task:",taskText.innerText);
+
+if(updated!==null && updated!==""){
+taskText.innerText=updated;
+}
+
+}
+
+/* SEARCH */
+
+function searchTask(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let tasks=document.querySelectorAll(".task");
+
+tasks.forEach(task=>{
+
+let text=task.innerText.toLowerCase();
+
+task.style.display=text.includes(input) ? "flex" : "none";
+
+});
+
+}
+
+/* CLEAR ALL */
+
+function clearAll(){
+
+document.getElementById("pending").innerHTML="";
+document.getElementById("completed").innerHTML="";
+
+updateStats();
+
+}
+
+/* UPDATE STATS */
+
+function updateStats(){
+
+let total=document.querySelectorAll(".task").length;
+
+let completed=document.querySelectorAll("#completed .task").length;
+
+let percent= total===0 ? 0 : (completed/total)*100;
+
+document.getElementById("count").innerText=total;
+
+document.getElementById("done").innerText=completed;
+
+document.getElementById("score").innerText=
+Math.round(percent)+"%";
+
+document.getElementById("progress").style.width=
+percent+"%";
+
+}
+
+</script>
+
+</body>
+</html>
