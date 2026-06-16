@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APJ Abdul Kalam Tribute</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#070b18;
+color:white;
+}
+
+/* LIGHT EFFECT */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%, rgba(255,215,0,0.12), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(0,191,255,0.10), transparent 40%);
+z-index:-1;
+}
+
+/* HEADER */
+header{
+text-align:center;
+padding:70px;
+background:linear-gradient(135deg,#ffd700,#00bfff);
+color:black;
+}
+
+header h1{
+margin:0;
+font-size:48px;
+}
+
+/* SECTION */
+section{
+max-width:900px;
+margin:auto;
+padding:30px 20px;
+}
+
+h2{
+color:#ffd700;
+border-left:4px solid #ffd700;
+padding-left:10px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.06);
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid rgba(255,215,0,0.2);
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* CONTENT */
+.content{
+display:none;
+margin-top:10px;
+color:#ddd;
+line-height:1.7;
+}
+
+/* ACTIVE */
+.card.active .content{
+display:block;
+}
+
+/* QUOTE DARK BOX */
+.quote{
+background:#0b0f1f;
+padding:25px;
+border-radius:12px;
+border:1px solid rgba(255,215,0,0.25);
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+margin:20px auto;
+max-width:800px;
+color:#ddd;
+line-height:1.8;
+text-align:center;
+}
+
+.quote span{
+color:#ffd700;
+font-weight:bold;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:20px;
+background:#111827;
+color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Dr. A.P.J Abdul Kalam</h1>
+<p>Scientist | Teacher | Visionary 🇮🇳</p>
+</header>
+
+<!-- ABOUT -->
+<section>
+<h2>About Him</h2>
+
+<div class="card" onclick="toggle(this)">
+Early Life
+<div class="content">
+Born in Rameswaram, Tamil Nadu. He came from a simple family and studied with discipline.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Education
+<div class="content">
+Studied Physics and Aerospace Engineering. Developed strong interest in science and innovation.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Scientific Career
+<div class="content">
+Worked in DRDO and ISRO. Contributed to missile programs like Agni and Prithvi.
+</div>
+</div>
+
+</section>
+
+<!-- WORK -->
+<section>
+<h2>Work</h2>
+
+<div class="card" onclick="toggle(this)">
+DRDO Contribution
+<div class="content">
+He played a major role in India’s missile development system.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+ISRO Contribution
+<div class="content">
+He worked in satellite and space research projects.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Defense Projects
+<div class="content">
+Strengthened India’s defense technology through innovation.
+</div>
+</div>
+
+</section>
+
+<!-- AWARDS -->
+<section>
+<h2>Awards</h2>
+
+<div class="card" onclick="toggle(this)">
+Bharat Ratna
+<div class="content">
+India’s highest civilian award for his service to science.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Padma Awards
+<div class="content">
+Padma Bhushan and Padma Vibhushan for scientific excellence.
+</div>
+</div>
+
+</section>
+
+<!-- BOOKS -->
+<section>
+<h2>Books</h2>
+
+<div class="card" onclick="toggle(this)">
+Wings of Fire
+<div class="content">
+Autobiography of Dr. Kalam’s life journey.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Ignited Minds
+<div class="content">
+Motivates youth to think big and achieve goals.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+India 2020
+<div class="content">
+Vision for developing India into a strong nation.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Turning Points
+<div class="content">
+Important moments in his life journey.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+My Journey
+<div class="content">
+His personal experiences and inspirations.
+</div>
+</div>
+
+</section>
+
+<!-- WHY ADMIRE -->
+<section>
+<h2>Why People Admire Him</h2>
+
+<div class="card" onclick="toggle(this)">
+Inspiration
+<div class="content">
+He inspired millions of students to dream big.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Hard Work
+<div class="content">
+He worked continuously for India’s development.
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+Vision
+<div class="content">
+He always focused on future India and youth growth.
+</div>
+</div>
+
+</section>
+
+<!-- QUOTE -->
+<section>
+<div class="quote">
+“Dream is not what you see in sleep, it is something that does not let you sleep.”  
+<br><br>
+<span>– Dr. A.P.J Abdul Kalam</span>
+</div>
+</section>
+
+<!-- SCRIPT -->
+<script>
+function toggle(card){
+card.classList.toggle("active");
+}
+</script>
+
+<footer>
+Made with ❤️ for Internship Project
+</footer>
+
+</body>
+</html>
